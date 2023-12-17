@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         builder: (context, state) {
           return MaterialApp(
             theme: theme,
-            title: 'hexpdev_s_application1',
+            title: 'Coremetal FaceApp',
             navigatorKey: NavigatorService.navigatorKey,
             debugShowCheckedModeBanner: false,
             localizationsDelegates: [
