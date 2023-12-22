@@ -1,53 +1,47 @@
+import 'package:FaceApp/utils/face_camera.dart';
+import 'package:FaceApp/Values/values.dart';
+import 'package:FaceApp/providers/auth_provider.dart';
+import 'package:FaceApp/providers/employee_provider.dart';
+import 'package:FaceApp/splash_screen.dart';
+import 'package:FaceApp/utils/navigation_service.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'core/app_export.dart';
+import 'package:overlay_support/overlay_support.dart';
+import 'package:provider/provider.dart';
+import 'locator.dart' as ltr;
 
-var globalMessengerKey = GlobalKey<ScaffoldMessengerState>();
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Future.wait([
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-    ]),
-    PrefUtils().init()
-  ]).then((value) {
-    runApp(MyApp());
-  });
+  await FaceCamera.initialize();
+  await ltr.init();
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => ltr.loc<LoginProvider>()),
+        ChangeNotifierProvider(
+            create: (context) => ltr.loc<EmployeeProvider>()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ThemeBloc(
-        ThemeState(
-          themeType: PrefUtils().getThemeData(),
-        ),
-      ),
-      child: BlocBuilder<ThemeBloc, ThemeState>(
-        builder: (context, state) {
-          return MaterialApp(
-            theme: theme,
-            title: 'Coremetal FaceApp',
-            navigatorKey: NavigatorService.navigatorKey,
-            debugShowCheckedModeBanner: false,
-            localizationsDelegates: [
-              AppLocalizationDelegate(),
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: [
-              Locale(
-                'en',
-                '',
-              ),
-            ],
-            initialRoute: AppRoutes.initialRoute,
-            routes: AppRoutes.routes,
-          );
-        },
+    return OverlaySupport.global(
+      child: MaterialApp(
+        color: AppColors.primaryDarkColor,
+        navigatorKey: NavigationService.navigatorKey,
+        debugShowCheckedModeBanner: false,
+        title: 'Coremetal Faceapp',
+        theme: ThemeData(primarySwatch: Colors.blue),
+        home: const SplashScreen(),
       ),
     );
   }
