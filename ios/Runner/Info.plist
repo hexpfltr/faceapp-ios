@@ -29,11 +29,11 @@
 	<key>NSLocalNetworkUsageDescription</key>
 	<string>We need access to the local network for delivering real-time notifications and updates.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>CoreMetal Attendance requires access for check-in and check-out security verification.</string>
+	<string>CoreMetal Attendance requires location access for check-in and check-out security verification.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>CoreMetal Attendance requires access for check-in and check-out security verification.</string>
+	<string>CoreMetal Attendance requires location access for check-in and check-out security verification.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>CoreMetal requires access for check-in and check-out security verification.</string>
+	<string>CoreMetal requires location access for check-in and check-out security verification.</string>
 		<key>UILaunchStoryboardName</key>
 		<string>LaunchScreen</string>
 		<key>UIMainStoryboardFile</key>
