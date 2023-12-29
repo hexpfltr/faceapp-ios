@@ -26,6 +26,8 @@
 		<true/>
 		<key>NSCameraUsageDescription</key>
 	<string>CoreMetal Attendance requires access to your camera for Face scanning during the check-in and checkout processes.</string>
+<key>NSPhotoLibraryUsageDescription</key>
+	<string>CoreMetal Attendance needs access to your photo library to Face scanning during the check-in and checkout processes.</string>
 	<key>NSLocalNetworkUsageDescription</key>
 	<string>We need access to the local network for delivering real-time notifications and updates.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
